@@ -38,6 +38,20 @@ jobs:
         with:
           push: true
           tags: aleemantap/cicd-go-1:latest
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTV }}
+          username: ${{ secrets.USERNAMEV }}
+          key: ${{ secrets.PRIVATE_KEYV }}
+          port: 22
+          script: |
+            cd /home/app/aleemantap/goa
+            git pull origin main
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml down
+            docker compose -f docker-compose.prod.yml up -d
+            docker image prune -f
 
     
       
