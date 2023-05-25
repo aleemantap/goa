@@ -30,13 +30,13 @@ jobs:
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.TOKEN }}
+          password: ${{ secrets.PASSWORD }}
 
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: girikuncoro/belajar-cicd:latest
+          tags: aleemantap/cicd-go-1:latest
       
       
